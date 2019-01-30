@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /**
+         * setTimeout()：延时调用，指定时间以后执行，只会执行一次
+         * 可以与定时调用相互替换
+         */
+        var num = 1;
+        var timer = setTimeout(function () {
+            console.log(num++);
+        },3000);
+        clearTimeout(timer);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

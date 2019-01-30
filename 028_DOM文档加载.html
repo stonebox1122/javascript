@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /**
+         * 浏览器加载一个页面时，是按照自上而下的顺序加载执行的。
+         * 为window的onload事件绑定的处理函数在整个页面加载完成后才执行，这样可以确保代码执行时所有的DOM对象已经加载完成
+         */
+        window.onload = function () {
+            //获取对象
+            var btn = document.getElementById("btn");
+            //可以为按钮的对应事件绑定处理函数的形式来响应事件，当事件被触发时，其对应的函数将会被调用
+            btn.onclick = function () {
+                console.log("click button");
+            };
+        }
+    </script>
+</head>
+<body>
+    <button id="btn">button</button>
+</body>
+</html>

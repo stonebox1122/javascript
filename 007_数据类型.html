@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /**
+         * 数据类型指的就是字面量的类型，在JS中一共有六种数据类型
+         * String 字符串
+         * Number 数值
+         * Boolean 布尔值
+         * Null 空值
+         * Undefined 未定义
+         * Object 对象
+         * 其中string Number Boolean Null Undefined属于基本数据类型
+         * 而Object属于引用数据类型
+         */
+
+        /**
+         * String字符串：在JS中字符串需要使用引号引起了，使用双引号或单引号都可以
+         * 引号不能嵌套
+         * 在字符串中可以使用\作为转义字符
+         * \"表示"
+         * \'表示'
+         * \n表示换行
+         * \t表示制表符
+         */
+        var str = "hello";
+        console.log(str);
+
+        var str = "hello: 'world'";
+        console.log(str);
+
+        var str = "hello: \"world\"";
+        console.log(str);
+
+        /**
+         * Number数字：整数和小数
+         * typeof：检查变量的类型
+         * Infinity：表示正无穷
+         * NaN：特殊的数字，表示Not a Number
+         */
+        var a = 1;
+        console.log(a);
+
+        var b = 2.1
+        console.log(b);
+
+        console.log(typeof a);
+
+        var c1 = Number.MAX_VALUE; //最大值
+        console.log(c1);
+        var c2 = Number.MIN_VALUE; //最小的正值
+
+        var d = Number.MAX_VALUE * Number.MAX_VALUE;
+        console.log(d);
+
+        var e = Infinity;
+        console.log(typeof e); //返回number
+
+        var f = NaN;
+        console.log(f);
+        console.log(typeof f); //返回number
+
+        var g1 = 111 + 222; //整数运算基本可以保证精确
+        console.log(g1);
+
+        var g2 = 0.1 + 0.2; //浮点运算可能得到一个不精确的结果，不要使用JS进行精确度要求高的运算
+        console.log(g2);
+
+        /**
+         * Boolean布尔值：true，false
+         */
+        var bool = true;
+        console.log(typeof bool); //返回boolean
+
+        /**
+         * Null类型的值只有一个：就是null，专门用来表示一个为空的对象
+         * Undefined类型的值只有一个，就是undefined，当声明一个变量而没有赋值时，值就是undefined
+         */
+        var a = null;
+        console.log(a); //返回null
+        console.log(typeof a); //返回object
+
+        var aa;
+        console.log(aa); //返回undefined
+        console.log(typeof aa); //返回undefined
+
+        /**
+         * 强制类型转换指将一个数据类型强制转换为其他数据类型
+         * 主要是指将其他数据类型转换为String Number Boolean
+         */
+        var a = 123;
+        var b = a.toString(); //调用toString()方法转换为String类型，注意null和undefined没有toString()方法
+        console.log(typeof b);
+
+        var b = String(a); //调用String()函数，将被转换的数据作为参数传递给函数
+        //对于Number和Boolean实际上就是调用toString()方法，
+        // 对于null和undefined，会将null直接转换为"null"，将undefined直接转换为"undefined"
+        console.log(typeof b);
+
+        /**
+         * 将其他数据类型转为为Number
+         * 方式一：调用Number()函数
+         *      字符串 --> 数字
+         *          1.如果是纯数字字符串，则直接将其转换为数字
+         *          2.如果字符串中有非数字的内容，则转换为NaN
+         *          3.如果字符串是一个空串或者全是空格，则转换为0
+         *      布尔 --> 数字
+         *          1.true转为1
+         *          2.false转为0
+         *      Null --> 数字
+         *          0
+         *      Undefined --> 数字
+         *          NaN
+         *
+         * 方式二：调用parseInt()或者parseFloat()函数，第二个参数指定数字的进制
+         * parseInt()从左到右将一个字符串中前面有效的整数取出来
+         * parseInt()从左到右将一个字符串中前面有效的浮点数取出来
+         * 如果对非String使用parseInt()或者parseFloat()，会先将其转换为String，然后再操作
+         */
+        var a = "123";
+        var b = Number(a);
+        console.log(typeof b);
+
+        a = "123px";
+        b = parseInt(a);
+        console.log(typeof b);
+        console.log(b);
+
+        /**
+         * 将其他数据类型转换为Boolean，使用Boolean()函数
+         * 数字 ---> 布尔
+         *      除了0和NaN，其余的都是true
+         * 字符串 --> 布尔
+         *      除了""（空串），其余的都是true
+         * null和undefined都会转换为false
+         * 对象也会转换为true
+         */
+        var a = 123;
+        b = Boolean(a);
+        console.log(b);
+        console.log(typeof b);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

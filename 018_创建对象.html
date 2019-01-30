@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /**
+         * 使用工厂方法创建对象
+         * 使用的构造函数都是Object，创建的对象都是Object这个类型
+         * 无法区分出多种类型的对象，故不常用
+         */
+        function createPerson(name, age, gender) {
+            //创建对象
+            var obj = new Object();
+            //添加属性
+            obj.name = name;
+            obj.age = age;
+            obj.gender = gender;
+            obj.sayName = function () {
+                console.log(this.name);
+            }
+            //返回对象
+            return obj;
+        }
+        var obj1 = createPerson("tom",18,'male');
+        var obj2 = createPerson("jerry",20,'female');
+        obj1.sayName();
+        obj2.sayName();
+
+        /**
+         * 使用构造函数创建对象
+         * 创建一个构造函数，用来创建专门的对象
+         * 构造函数就是一个普通的函数，创建方式和普通函数没有区别
+         * 不同的是构造函数约定首字母大写
+         *
+         * 构造函数与普通函数的区别就是调用方式的不同
+         *      - 普通函数是直接调用
+         *      - 构造函数需要使用new关键字来调用
+         *
+         * 构造函数执行流程：
+         *      1.立即创建一个新的对象
+         *      2.将新建的对象设置为函数中this，在构造函数中可以使用this来引用新建的对象
+         *      3.逐行执行函数中的代码
+         *      4.将新建的对象作为返回值返回
+         *
+         * 使用同一个构造函数创建的对象称为一类对象，也将一个构造函数称为一个类
+         * 通过一个构造函数创建的对象，称为该类的实例
+         * 使用instanceof可以检查一个对象是否是一个类的实例，语法：对象 instanceof 构造函数
+         * 所有对象都是Object的后代
+         *
+         */
+        function Person(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.sayName = function () {
+                console.log(this.name);
+            }
+        }
+        //作为普通函数调用
+        var per = Person();
+        console.log(per); //输出undefined
+
+        //作为构造函数调用，创建一个实例
+        var per = new Person("tom",18,"male");
+        console.log(per); //输出对象
+        console.log(per instanceof Person); //输出true
+        console.log(per instanceof Object); //输出true
+
+        /**
+         * 在构造函数中，为避免实例化的时候重复创建相同的方法，可以将方法在全局作用域中定义
+         * 但是将函数定义在全局作用域，污染了全局作用域的命名空间，而且定义在全局作用域中也很不安全
+         */
+        function Dog(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.sayName = fun;
+        }
+        function fun() {
+            console.log(this.name);
+        }
+
+        /**
+         * 原型对象
+         * 解析器会向创建的每一个函数添加一个prototype属性
+         * prototype属性对应一个对象，就是所谓的原型对象
+         * 当函数以普通函数形式调用，prototype没有任何作用
+         * 当函数以构造函数形式调用，所创建对象中都会有一个隐含属性，指向该构造函数的原型对象，可以通过__proto__访问该属性
+         * 原型对象相当于一个公共区域，所有同一个类的实例都可以访问到这个原型对象，可以将对象中共有的内容统一设置到原型对象中
+         * 当访问对象的一个属性或方法时，会先在对象自身中寻找，如果有则直接使用，没有则在原型对象中寻找，如果没有则继续在原型的原型中寻找，直到Object对象
+         * Object对象的原型没有原型，如果在Object中依然没有找到，则返回undefined
+         * 后续创建构造函数时，可以将这些对象共有的属性和方法统一添加到构造函数的原型对象中
+         * 使用in检查对象中是否含有某个属性时，如果对象中没有但是原型中有，也会返回true，这时可以使用Object对象的hasOwnProperty()方法
+         */
+        function MyClass() {
+
+        }
+        var mc = new MyClass();
+        console.log(mc.__proto__ == MyClass.prototype); //输出true
+
+        var mc2 = new MyClass();
+        console.log(mc2.__proto__ == MyClass.prototype); //输出true
+
+        //向MyClass的原型对象中添加属性
+        MyClass.prototype.a = 123;
+        console.log(mc.a); //输出123
+
+        //向MyClass的原型对象中添加方法
+        MyClass.prototype.sayHello = function () {
+            console.log("hello");
+        }
+        console.log(mc.sayHello());
+
+        console.log("a" in mc); //true
+        console.log(mc.hasOwnProperty("a")); //false
+    </script>
+</head>
+<body>
+
+</body>
+</html>

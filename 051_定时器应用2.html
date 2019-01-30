@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0; /*由于IE浏览器默认初始值值是auto，不方便计算，所有这里需要设置初始值*/
+        }
+    </style>
+    <script type="text/javascript">
+
+        var timer;
+
+        window.onload = function () {
+            var btn1 = document.getElementById("btn1");
+            var btn2 = document.getElementById("btn2");
+            var box1 = document.getElementById("box1");
+            //点击向右按钮后，使box1向右移动（left值增大）
+            btn1.onclick = function () {
+                move(box1,10,800)
+            }
+
+            //点击向左按钮后，使box1向左移动（left值减小）
+            btn2.onclick = function () {
+                move(box1,10,0)
+            }
+        };
+
+        /**
+         * 创建一个可以执行简单动画的函数
+         * @param obj：要执行动画的对象
+         * @param speed：速度
+         * @param target：移动目标
+         */
+        function move(obj, speed, target) {
+            //关闭上一个定时器
+            clearInterval(timer);
+
+            //判断速度的正负值
+            var currValue = parseInt(getStyle(obj,"left"));
+            if (currValue > target){
+                speed = -speed;
+            }
+
+            //开启定时器
+            timer = setInterval(function () {
+
+                //获取box1原来left值
+                var oldValue = parseInt(getStyle(obj,"left"));
+
+                //在旧值的基础上修改
+                var newValue = oldValue + speed;
+
+                //向左移动时，需要判断newValue是否小于target
+                //向右移动时，需要判断newValue是否大于target
+                if ((speed < 0 && newValue < target) || (speed > 0 && newValue > target)){
+                    newValue = target;
+                }
+
+                //将新值设置给box1
+                obj.style.left = newValue + "px";
+
+                //当移动到800px时，停止
+                if (newValue == target){
+                    clearInterval(timer);
+                }
+            },30)
+        };
+
+        /**
+         * 定义一个函数，获取指定元素的当前样式
+         * @param obj 要获取样式的元素
+         * @param name 要获取的样式名
+         */
+        function getStyle(obj, name) {
+            if (window.getComputedStyle) {
+                //正常浏览器，具有getComputedStyle()方法
+                return getComputedStyle(obj, null)[name];
+            }else {
+                //IE8，没有getComputedStyle()方法
+                return obj.currentStyle[name];
+            }
+        };
+    </script>
+</head>
+<body>
+    <button id="btn1">右移</button>
+    <button id="btn2">左移</button>
+    <br><br>
+    <div id="box1"></div>
+    <div style="width: 0; height: 1000px; border-left:1px black solid; position: absolute; left: 800px;top:0;"></div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            /**
+             * 键盘事件：一般都会绑定给可以获取到焦点的对象或者是document
+             * onkeydown 按键被按下，如果一直按着，则会连续触发，当onkeydown连续触发时，第一次和第二次之间会间隔稍长，这种设计是为了防止误操作
+             * onkeyup 按键被松开
+             * keyCode获取按键编码
+             * altKey，ctrlKey，shiftKey用来判断alt，ctrl和shift是否被按下，如果按下返回true，否则返回false
+             */
+            /*document.onkeydown = function (event) {
+                event = event || window.event;
+                if (event.keyCode === 89 && event.ctrlKey){
+                    console.log("ctrl和y都被按下");
+                }
+            };*/
+
+            var input = document.getElementsByTagName("input")[0];
+            //文本框中不能输入数字，数字的keyCode为48-57
+            input.onkeydown = function (event) {
+                event = event || window.event;
+                if (event.keyCode >= 48 && event.keyCode <= 57) {
+                    //在文本框输入内容，属于onkeydown的默认行为，如果使用return false取消默认行为，则输入内容不会出现在文本框中
+                    return false;
+                }
+            }
+
+            /**
+             * 使div可以根据不同的方向键向不同的方向移动
+             * 左：37，上：38，右：39，下：40
+             */
+            document.onkeydown = function (event) {
+                event = event || window.event;
+                var speed = 10; //表示移动的速度
+                //当用户按下ctrl以后，速度加快
+                if (event.ctrlKey){
+                    speed = 50;
+                }
+                console.log(event.keyCode);
+                switch (event.keyCode) {
+                    case 37:
+                        box1.style.left = box1.offsetLeft - speed + "px";
+                        break;
+                    case 39:
+                        box1.style.left = box1.offsetLeft + speed + "px";
+                        break;
+                    case 38:
+                        box1.style.top = box1.offsetTop - speed + "px";
+                        break;
+                    case 40:
+                        box1.style.top = box1.offsetTop + speed + "px";
+                        break;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text">
+    <div id="box1"></div>
+</body>
+</html>

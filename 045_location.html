@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /**
+         * location：该对象封装了浏览器地址栏的信息
+         */
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+            btn01.onclick = function () {
+                console.log(location); //直接打印可以获取到地址栏的信息，即页面的完整路径
+                location = "http://www.baidu.com"; //修改为完整路径或相对路径，则会跳转到该路径，并生成相应的历史记录
+                location.assign("http://www.baidu.com"); //加载新的页面，与上面修改功能相同，会生成历史记录
+                location.reload(true); //重新加载页面，true表示强制清空缓存
+                location.replace("http://www.baidu.com"); //用新的页面替换当前页面，不会生成历史记录，不能回退。
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn01">click me</button>
+</body>
+</html>

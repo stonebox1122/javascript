@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /**
+         * 对象属于一种复合的数据类型，在对象中可以保存多个不同的数据类型的属性
+         * 对象的分类：
+         * 1.内建对象
+         *      - 在ES标准中定义的对象，在任何的ES的实现中都可以使用
+         *      - 比如：Math String Number Boolean Function Object...
+         * 2.宿主对象
+         *      - 由JS的运行环境提供的对象，目前来讲主要指由浏览器提供的对象
+         *      - 比如BOM DOM
+         *3.自定义对象
+         *      - 由开发人员自己创建的对象
+         */
+
+        /**
+         * 创建对象
+         * 使用new关键字调用的函数，是构造函数constructor
+         * 构造函数是专门用来创建对象的函数
+         * 一般使用对象字面量 {} 来创建对象，可以在创建对象时直接指定对象属性
+         */
+        // var obj = new Object();
+        // console.log(obj);
+
+        var obj = {name:"stone",gender:"male",age:20,test:{name:"box"}};
+        console.log(obj);
+
+        /**
+         * 在对象中保存的值称为属性
+         * 使用 对象.属性名 = 属性值 向对象添加属性
+         * 也可以使用 对象["属性名"] = 属性值，读取时也要使用 对象["属性名"]
+         * 可以在[]中传递一个变量作为属性名
+         */
+        obj.name = "stone";
+        obj.gender = "male";
+        obj.age = 18;
+        console.log(obj);
+
+        /**
+         * 读取对象属性
+         * 如果读取对象中没有定义的属性，不会报错返回undefined
+         * JS对象的属性值，可以是任意的数据类型，包括对象
+         * 使用 "属性名" in 对象 检查对象是否有指定属性，有返回true，没有返回false
+         */
+        console.log(obj.name);
+        console.log("age" in obj);
+
+        /**
+         * 修改对象的属性值
+         */
+        obj.age = 20;
+        console.log(obj.age);
+
+        /**
+         * 删除对象属性：delete 对象.属性名
+         */
+        delete obj.age;
+        console.log(obj.age);
+
+        /**
+         * 基本数据类型：String Number Boolean Null Undefined
+         * 引用数据类型： Object
+         * JS中的变量名都是保存到栈内存中
+         * 基本数据类型的变量值直接在栈内存中存储，值与值之间是独立存在，修改一个不会影响其他
+         * 对象是保存在堆内存中，每创建一个对象，就会在堆内存中开辟出一块空间，而变量保存的是对象的内存地址（对象的引用），
+         * 如果两个对象保存的是同一个对象引用，当一个变量修改属性时，另一个也会改变
+         *
+         * 当比较两个基本数据类型时，就是比较值
+         * 而比较两个引用数据类型时，却是比较对象的内存地址
+         */
+        var a = 10;
+        var b = a;
+        a++;
+        console.log(a);
+        console.log(b);
+
+        var obj1 = new Object();
+        obj1.name = "stone";
+        var obj2 = obj1;
+        console.log(obj1.name);
+        console.log(obj2.name);
+        obj1.name = "box";
+        console.log(obj1.name);
+        console.log(obj2.name);
+        obj2 = null;
+        console.log(obj1); //不受影响
+        console.log(obj2); //null
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

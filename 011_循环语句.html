@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+
+        var i = 0; //初始化变量
+        while (i < 5){ //设置条件表达式
+            console.log(i);;
+            i++; //更新初始化变量
+        }
+
+        var i = 0;
+        var a = 200000;
+        while (a < 1000000){
+            a = a * 1.05;
+            i++;
+        }
+        document.write(i);
+        document.write("<br/>");
+
+        var sum = 0;
+        for (var i = 1; i <= 100 ; i++){
+            if (i % 2 != 0){
+                sum += i;
+            }
+        }
+        console.log(sum);
+
+        //水仙花数
+        for (var i = 100; i < 1000; i++){
+            var a = parseInt(i / 100);
+            var b = parseInt(i / 10) % 10;
+            var c = i % 10;
+            if (a * a * a + b * b * b + c * c * c == i){
+                console.log(i);
+            }
+        }
+
+        for (var i=0; i<5; i++){
+            for (var j=0; j<i+1; j++){
+                document.write("*&nbsp;&nbsp;&nbsp;");
+            }
+            document.write("<br/>")
+        }
+
+        //九九乘法表
+        for (var i=1; i<=9; i++){
+            for (var j=1; j<=i; j++){
+                document.write("<span>" + j + "*" + i + "=" + i*j + "</span>");
+            }
+            document.write("<br/>");
+        }
+
+        outer:
+        for (var i=0; i<5; i++){
+            console.log("外层循环" + i);
+            for (var j=0; j<5; j++){
+                break outer;
+                console.log("--->内层循环" + j);
+            }
+        }
+
+        //质数
+        console.time("test");
+        for (var i=2; i<=100; i++){
+            var flag = true;
+            for (var j=2; j<=Math.sqrt(i); j++){
+                if (i%j == 0){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag){
+                console.log(i);
+            }
+        }
+        console.timeEnd("test");
+
+    </script>
+    <style type="text/css">
+        span{
+            display: inline-block;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>

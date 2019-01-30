@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /**
+         * 数组（Array）
+         *      - 数组也是一个对象，使用从0开始的整数作为索引来操作元素
+         *      - 数组的存储性能比普通对象更好
+         *      - 如果读取不存在的索引，不会报错返回undefined
+         */
+        var arr = new Array(); //创建数组
+        var arr2 = new Array(1,2,3); //创建数组的同时添加元素
+        var arr3 = new Array(3); //创建数组，长度为3
+        console.log(typeof  arr); //输出object
+        arr[0] = 10; //向数组中添加元素
+        arr[1] = 11;
+        console.log(arr); //返回[10, 11]
+        console.log(arr[0]); //返回10
+        console.log(arr.length); //返回2，获取连续数组长度
+
+        arr[3] = 12;
+        console.log(arr); //返回[10, 11, empty, 12]，尽量不要创建非连续数组
+        console.log(arr.length); //返回4，获取非连续数组的最大索引+1
+
+        arr.length = 5;
+        console.log(arr); //返回[10, 11, empty, 12, empty]
+
+        arr.length = 2;
+        console.log(arr); //返回[10, 11]，可以通过修改length长度删除元素
+
+        arr[arr.length] = 12; //使用 数组[数组.length] 向数组最后添加元素
+        console.log(arr); //返回[10, 11, 12]
+
+        /**
+         * 使用字面量创建数组，可以在创建时指定数组中的元素，常用
+         */
+        var arr1 = [];
+        var arr2 = [1,2,3,4,5];
+        console.log(arr2);
+
+        arr = ["hello",1,true,null,undefined]; //数组的元素可以是任意数据类型
+        console.log(arr);
+
+        arr = [{name:"stone"},{name:"box"},{name:"tom"}]; //数组的元素可以是对象
+        console.log(arr);
+
+        arr = [function () {},function () {}]; //数组的元素可以是函数
+        console.log(arr);
+
+        arr = [[1,2,3],[4,5,6],[7,8,9]]; //数组的元素可以是数组
+        console.log(arr);
+
+        /**
+         * 数组的方法
+         concat()	连接两个或更多的数组，并返回结果。
+         join()	把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。
+         pop()	删除并返回数组的最后一个元素
+         push()	向数组的末尾添加一个或更多元素，并返回新的长度。
+         reverse()	颠倒数组中元素的顺序。
+         shift()	删除并返回数组的第一个元素
+         slice()	从某个已有的数组返回选定的元素
+         sort()	对数组的元素进行排序
+         splice()	删除元素，并向数组添加新元素。
+         toSource()	返回该对象的源代码。
+         toString()	把数组转换为字符串，并返回结果。
+         toLocaleString()	把数组转换为本地数组，并返回结果。
+         unshift()	向数组的开头添加一个或更多元素，并返回新的长度，其他元素索引会自动调整。
+         valueOf()	返回数组对象的原始值
+         */
+        var arr = ["stone","box","tom"];
+        var result = arr.push("Jerry","Bob");
+        console.log(arr); //返回["stone", "box", "tom", "Jerry", "Bob"]
+        console.log(result); //返回新的长度5
+
+        var result = arr.pop();
+        console.log(arr); //返回["stone", "box", "tom", "Jerry"]
+        console.log(result); //返回被删除元素Bob
+
+        var result = arr.unshift("Jerry","Bob");
+        console.log(arr); //返回["Jerry", "Bob", "stone", "box", "tom", "Jerry"]
+        console.log(result); //返回新的长度6
+
+        var result = arr.shift();
+        console.log(arr); //返回["Bob", "stone", "box", "tom", "Jerry"]
+        console.log(result); //返回被删除元素Jerry
+
+        var result = arr.slice(0,2); //截取，从索引0到1
+        console.log(arr); //返回["Bob", "stone", "box", "tom", "Jerry"]
+        console.log(result); //返回["Bob", "stone"]
+
+        var result = arr.splice(0,2,"Cat"); //删除，从索引0开始，删除2个元素，并添加1个元素
+        console.log(arr); //返回["Cat", "box", "tom", "Jerry"]
+        console.log(result); //返回被删除的元素数组["Bob", "stone"]
+
+        var result = arr.splice(2,0,"Cat","Dog"); //添加，从索引2开始
+        console.log(arr); //返回["Cat", "box", "Cat", "Dog", "tom", "Jerry"]
+        console.log(result); //没有元素被删除，返回[]
+
+        arr2 = ["stone","alex"];
+        var result = arr.concat(arr2); //拼接数组，不会对原数组产生影响
+        console.log(arr); //返回["Cat", "box", "Cat", "Dog", "tom", "Jerry"]
+        console.log(arr2); //返回["stone", "alex"]
+        console.log(result); //返回["Cat", "box", "Cat", "Dog", "tom", "Jerry", "stone", "alex"]
+
+        var result = arr.join("-"); //默认使用","进行连接
+        console.log(arr); //返回["Cat", "box", "Cat", "Dog", "tom", "Jerry"]
+        console.log(result); //返回Cat-box-Cat-Dog-tom-Jerry
+
+        var result = arr.reverse(); //会修改原数组
+        console.log(arr); //返回["Jerry", "tom", "Dog", "Cat", "box", "Cat"]
+        console.log(result); //返回["Jerry", "tom", "Dog", "Cat", "box", "Cat"]
+
+        var result = arr.sort(); //会修改原数组，按照Unicode编码进行排序，对数字也是
+        console.log(arr); //返回["Cat", "Cat", "Dog", "Jerry", "box", "tom"]
+        console.log(result); //返回["Cat", "Cat", "Dog", "Jerry", "box", "tom"]
+
+        /**
+         * 可以在sort()添加一个回调函数，来指定排序规则
+         *      - 回调函数需要定义两个形参
+         *      - 浏览器将会分别使用数组中的元素作为实参去调用回调函数
+         *      - 使用哪个元素调用不确定，但顺序与形参顺序一致
+         *      - 浏览器会根据回调函数的返回值来决定元素的顺序
+         *          1.如果返回一个大于0的值，则元素会交换位置
+         *          2.如果返回一个小于0的值，则元素位置不变
+         *          3.如果返回0，则认为两个元素相等，也不交换位置
+         */
+        arr = [1,2,3,11,12,13];
+        console.log(arr.sort()); //返回[1, 11, 12, 13, 2, 3]
+
+        arr.sort(function (a, b) {
+            return a - b; //升序
+        })
+        console.log(arr); //返回[1, 2, 3, 11, 12, 13]
+
+        arr.sort(function (a, b) {
+            return b - a; //降序
+        })
+        console.log(arr);  //返回[13, 12, 11, 3, 2, 1]
+
+
+        /**
+         * 数组的遍历，将数组中的所有元素都取出来
+         */
+        var arr = ["stone","box","tom"];
+        for (var i=0; i<arr.length; i++) {
+            console.log(arr[i]);
+        }
+
+        /**
+         * 练习：创建函数，从一个对象数组中进行筛选，将符合条件的对象加入到新的数组中
+         */
+        function Person(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+        Person.prototype.toString = function () {
+            return "Person[name=" + this.name + ",age=" + this.age + ",gender=" + this.gender + "]";
+        }
+        var per1 = new Person("tome",18,"male");
+        var per2 = new Person("tome",9,"male");
+        var per3 = new Person("tome",28,"male");
+        var per4 = new Person("tome",12,"male");
+        var per5 = new Person("tome",30,"male");
+        var arr = [per1,per2,per3,per4,per5];
+
+        function selectAudit(arr) {
+            var audit = [];
+            for (var i=0; i<arr.length; i++) {
+                if (arr[i].age >= 18) {
+                    audit.push(arr[i]);
+                }
+            }
+            return audit;
+        }
+        console.log(selectAudit(arr));
+
+        /**
+         * 使用forEach方法遍历数组，不支持IE8
+         * 需要使用回调函数（由浏览器调用）作为参数
+         * 函数执行次数与数组元素个数相同，每次执行浏览器会将遍历到的元素以实参的形式传递进来
+         * 可以定义形参来读取元素
+         * 浏览器会在回调函数中传递三个参数
+         *      - 第一个参数为当前正在遍历的元素
+         *      - 第二个参数为当前正在变量的元素的索引
+         *      - 第三个参数为当前正在遍历的数组
+         */
+        var arr = ["stone","box","tom"];
+        arr.forEach(function (value, index, obj) {
+            console.log(value);
+        })
+
+        /**
+         * 数组去重
+         */
+        var arr = [1,2,3,1,2,3,1,2,3];
+        for (var i=0; i<arr.length; i++){
+            for (var j=i+1; j<arr.length; j++){
+                if (arr[i] == arr[j]){
+                    arr.splice(j,1);
+                    j--; //当删除了当前j所在的元素后，后边的元素会自动补位，需要再比较一次当前位置的元素
+                }
+            }
+        }
+        console.log(arr);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

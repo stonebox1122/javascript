@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var count = document.getElementById("count");
+            /**
+             * setInterval()：定时调用
+             * 参数：
+             *      1.回调函数
+             *      2.间隔时间，单位毫秒
+             * 返回值：number类型数据，作为定时器的唯一标识
+             */
+            var num = 1;
+            var timer = setInterval(function () {
+                count.innerHTML = num++;
+                if (num == 11){
+                    clearInterval(timer);
+                }
+            },1000);
+
+            /**
+             * clearInterval()：关闭定时器，使用定时器标识作为参数
+             */
+        }
+    </script>
+</head>
+<body>
+    <h1 id="count"></h1>
+</body>
+</html>

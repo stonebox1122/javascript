@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer{
+            width: 500px;
+            margin: 50px auto;
+            padding: 10px;
+            background-color: greenyellow;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var prev  = document.getElementById("prev");
+            var next = document.getElementById("next");
+            //切换图片就是修改图片的src属性
+            var img = document.getElementsByTagName("img")[0];
+            //创建数组用来保存图片的路径
+            var imgArr = ["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg"];
+            //创建变量来保存当前正在显示图片的索引
+            var index = 0;
+            //设置提示文字
+            var info = document.getElementById("info");
+            info.innerHTML = "一共 " + imgArr.length + " 张图片，当前第 " + (index + 1) + " 张";
+            prev.onclick = function () {
+                //切换到上一张
+                index--;
+                if (index < 0){
+                    index = imgArr.length - 1; //跳到最后一张
+                }
+                img.src = imgArr[index];
+                info.innerHTML = "一共 " + imgArr.length + " 张图片，当前第 " + (index + 1) + " 张";
+
+            }
+            next.onclick = function () {
+                //切换到下一张
+                index++;
+                if (index > imgArr.length - 1){
+                    index = 0; //调到第一章
+                }
+                img.src = imgArr[index];
+                info.innerHTML = "一共 " + imgArr.length + " 张图片，当前第 " + (index + 1) + " 张";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <p id="info"></p>
+        <img src="img/1.jpg" alt="冰棍">
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+
+</body>
+</html>
