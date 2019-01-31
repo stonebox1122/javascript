@@ -34,8 +34,8 @@
         #navDiv a{
             /*设置超链接浮动*/
             float: left;
-            width: 15px;
-            height: 15px;
+            width: 10px;
+            height: 10px;
             background-color: red;
             margin: 0 5px;
             /*设置透明*/
@@ -48,6 +48,7 @@
             background-color: black;
         }
     </style>
+    <script type="text/javascript"src="js/tools.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             //获取imgList
@@ -73,6 +74,76 @@
             //设置默认选中的效果
             allA[index].style.backgroundColor = "black";
 
+            //点击超链接切换到指定的图片
+            for (var i=0; i<allA.length; i++){
+                //为每一个超链接添加一个num属性
+                allA[i].num = i;
+
+                //为所有超链接绑定单击响应函数
+                allA[i].onclick = function () {
+                    //关闭自动切换的定时器
+                    clearInterval(timer);
+
+                    //获取点击超链接的索引，并将其设置为index
+                    index = this.num;
+
+                    //切换图片
+                    //imgList.style.left = index * (-520) + "px";
+
+                    //修改正在选中的a
+                    setA();
+
+                    //使用move函数来切换图片
+                    move(imgList, "left", 20, -520*index, function () {
+                        //动画执行完毕，开启自动切换
+                        autoChange();
+                    })
+                }
+            }
+
+            //开启自动切换图片
+            autoChange();
+
+            //创建一个方法用来设置选中的a
+            function setA() {
+                //判断当前索引是否是最后一张图片
+                if (index >= imgArr.length - 1){
+                    //则将index设置为0
+                    index = 0;
+
+                    //此时显示的最后一张图片，而最后一张图片和第一张是一模一样
+                    //通过CSS将最后一张切换成第一张
+                    imgList.style.left = 0;
+                }
+
+                //遍历所有的a，并将背景颜色设置为空
+                for (var i=0; i<allA.length; i++){
+                    allA[i].style.backgroundColor = "";
+                }
+
+                //将选中的a设置为黑色
+                allA[index].style.backgroundColor = "black";
+            }
+
+            //定义一个定时器标识
+            var timer;
+
+            //创建函数用来开启自动切换图片
+            function autoChange() {
+                //开启一个定时器来定时切换图片
+                timer = setInterval(function () {
+                    //使索引自增
+                    index++;
+
+                    //判断index的值
+                    index %= imgArr.length;
+
+                    move(imgList,"left",20,-520*index,function () {
+                        //修改导航按钮
+                        setA();
+                    })
+                },3000)
+            }
         }
     </script>
 </head>
@@ -86,6 +157,7 @@
             <li><img src="img/3.jpg"></li>
             <li><img src="img/4.jpg"></li>
             <li><img src="img/5.jpg"></li>
+            <li><img src="img/1.jpg"></li>
         </ul>
         <!--创建导航按钮-->
         <div id="navDiv">

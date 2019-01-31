@@ -56,3 +56,47 @@ function getStyle(obj, name) {
         return obj.currentStyle[name];
     }
 };
+
+/**
+ * 定义一个函数来向一个元素中添加指定的class属性值
+ * @param obj：要添加class属性的元素
+ * @param cn：要添加的class值
+ */
+function addClass(obj, cn) {
+    if (!hasClass(obj, cn)){
+        obj.className += " " + cn;
+    }
+}
+
+/**
+ * 判断一个元素中是否含有指定的class属性值
+ * @param obj
+ * @param cn
+ */
+function hasClass(obj, cn) {
+    var reg = new RegExp("\\b" + cn +  "\\b");
+    return reg.test(obj.className);
+}
+
+/**
+ * 移除元素中指定的class属性
+ * @param obj
+ * @param cn
+ */
+function removeClass(obj, cn) {
+    var reg = new RegExp("\\b" + cn +  "\\b");
+    obj.className = obj.className.replace(reg, "");
+}
+
+/**
+ * 切换类，有就删除，没有就添加
+ * @param obj
+ * @param cn
+ */
+function toggleClass(obj, cn) {
+    if (hasClass(obj, cn)){
+        removeClass(obj, cn);
+    }else {
+        addClass(obj, cn);
+    }
+}
